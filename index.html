@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="飘零电影网(piaolingdianyingwang-app)——最新高清电影、热门电视剧、动漫综艺在线观看与迅雷下载，每日更新，免费畅享。">
+<meta name="keywords" content="飘零电影网, piaolingdianyingwang-app, 最新电影, 高清电影, 电视剧, 在线观看, 电影下载">
+<meta name="author" content="飘零电影网">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>飘零电影网 - 最新高清电影在线观看_飘零电影网(piaolingdianyingwang-app)</title>
+<style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    :root{
+        --bg:#07091d;
+        --bg2:#0c1230;
+        --card:rgba(255,255,255,.05);
+        --line:rgba(255,255,255,.08);
+        --txt:#e8eaf6;
+        --sub:#9aa4c4;
+        --acc:#ff5c8a;
+        --acc2:#7c6bff;
+        --gold:#ffcf5c;
+    }
+    html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+    body{
+        font-family:"PingFang SC","Microsoft YaHei",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+        background:var(--bg);
+        color:var(--txt);
+        line-height:1.7;
+        overflow-x:hidden;
+    }
+    body::before{
+        content:"";position:fixed;inset:0;z-index:-2;
+        background:
+            radial-gradient(900px 500px at 12% -8%, rgba(124,107,255,.28), transparent 60%),
+            radial-gradient(800px 460px at 88% 12%, rgba(255,92,138,.22), transparent 60%),
+            radial-gradient(700px 420px at 50% 108%, rgba(255,207,92,.14), transparent 60%),
+            linear-gradient(180deg,#07091d 0%,#0a0f2e 45%,#07091d 100%);
+    }
+    body::after{
+        content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+        background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);
+        background-size:44px 44px;
+    }
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .wrap{width:100%;max-width:1200px;margin:0 auto;padding:0 20px}
+
+    /* ===== Header ===== */
+    .header{
+        position:sticky;top:0;z-index:100;
+        backdrop-filter:blur(14px);
+        -webkit-backdrop-filter:blur(14px);
+        background:rgba(7,9,29,.72);
+        border-bottom:1px solid var(--line);
+    }
+    .nav{display:flex;align-items:center;gap:18px;height:66px}
+    .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px;letter-spacing:.5px;flex-shrink:0}
+    .logo .badge{
+        width:34px;height:34px;border-radius:10px;
+        background:linear-gradient(135deg,var(--acc),var(--acc2));
+        display:grid;place-items:center;font-size:17px;box-shadow:0 6px 18px rgba(255,92,138,.35)
+    }
+    .logo b{background:linear-gradient(90deg,#fff,#ffd7e2);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .logo span{color:var(--acc);font-size:12px;font-weight:600;padding:2px 7px;border:1px solid rgba(255,92,138,.4);border-radius:20px}
+    .menu{display:flex;gap:6px;margin-left:auto;flex-wrap:wrap}
+    .menu a{
+        padding:8px 14px;border-radius:10px;font-size:14px;color:var(--sub);
+        transition:.25s;white-space:nowrap;position:relative;
+    }
+    .menu a:hover{color:#fff;background:rgba(255,255,255,.07)}
+    .menu a.on{color:#fff;background:linear-gradient(90deg,rgba(255,92,138,.25),rgba(124,107,255,.25))}
+    .search{
+        display:flex;align-items:center;gap:8px;
+        background:rgba(255,255,255,.06);border:1px solid var(--line);
+        border-radius:24px;padding:7px 14px;width:190px;
+    }
+    .search input{background:none;border:none;outline:none;color:#fff;font-size:13px;width:100%}
+    .search input::placeholder{color:#6f7899}
+
+    /* ===== Hero ===== */
+    .hero{
+        position:relative;padding:64px 0 40px;overflow:hidden;
+    }
+    .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:center}
+    .eyebrow{
+        display:inline-flex;align-items:center;gap:8px;font-size:12px;color:var(--gold);
+        padding:6px 14px;border:1px solid rgba(255,207,92,.3);border-radius:30px;
+        background:rgba(255,207,92,.06);margin-bottom:18px
+    }
+    .eyebrow i{width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px var(--gold);animation:pulse 1.6s infinite}
+    @keyframes pulse{50%{opacity:.25}}
+    .hero h1{
+        font-size:clamp(30px,5vw,52px);line-height:1.18;font-weight:900;
+        background:linear-gradient(100deg,#fff 10%,#ffb3c6 45%,#c7b8ff 80%);
+        -webkit-background-clip:text;background-clip:text;color:transparent;
+    }
+    .hero h1 em{font-style:normal;color:var(--acc);-webkit-text-fill-color:var(--acc)}
+    .hero p{color:var(--sub);font-size:15px;margin:16px 0 22px;max-width:540px}
+    .stats{display:flex;gap:26px;flex-wrap:wrap;margin-bottom:26px}
+    .stats div b{display:block;font-size:24px;font-weight:800;color:#fff}
+    .stats div small{color:var(--sub);font-size:12px}
+    .cta{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{
+        padding:13px 26px;border-radius:14px;font-size:15px;font-weight:700;cursor:pointer;
+        border:1px solid transparent;transition:.25s;display:inline-flex;align-items:center;gap:8px
+    }
+    .btn-p{background:linear-gradient(90deg,var(--acc),var(--acc2));color:#fff;box-shadow:0 10px 26px rgba(255,92,138,.34)}
+    .btn-p:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(255,92,138,.45)}
+    .btn-g{background:rgba(255,255,255,.05);color:#fff;border-color:var(--line)}
+    .btn-g:hover{background:rgba(255,255,255,.1)}
+
+    .poster{
+        position:relative;aspect-ratio:3/4;border-radius:22px;
+        background:linear-gradient(160deg,#1a1f44,#0d1230);
+        padding:14px;transform:perspective(1200px) rotateY(-9deg) rotateX(4deg);
+        box-shadow:0 30px 70px rgba(0,0,0,.55);
+    }
+    .poster .scr{
+        height:100%;border-radius:14px;overflow:hidden;position:relative;
+        background:
+            linear-gradient(rgba(0,0,0,.2),rgba(0,0,0,.2)),
+            repeating-linear-gradient(0deg,#1c2550 0 26px,#141b3d 26px 52px);
+    }
+    .poster .scr::after{
+        content:"▶";position:absolute;inset:0;display:grid;place-items:center;
+        font-size:54px;color:rgba(255,255,255,.85);
+        text-shadow:0 6px 24px rgba(0,0,0,.6)
+    }
+    .poster .tag{
+        position:absolute;top:24px;left:24px;background:var(--gold);color:#1a1200;
+        font-size:11px;font-weight:800;padding:5px 12px;border-radius:8px
+    }
+    .float{
+        position:absolute;border-radius:12px;padding:10px 14px;font-size:12px;
+        background:rgba(15,20,48,.85);backdrop-filter:blur(8px);border:1px solid var(--line);
+        box-shadow:0 12px 30px rgba(0,0,0,.4)
+    }
+    .f1{top:-14px;right:-10px}.f2{bottom:30px;left:-18px}.f3{bottom:-16px;right:22px}
+    .float b{display:block;font-size:15px;color:#fff}
+    .float img{width:26px;height:26px;border-radius:7px;margin-bottom:5px;background:linear-gradient(135deg,var(--acc2),var(--acc))}
+
+    /* ===== Section ===== */
+    section{padding:56px 0}
+    .sec-head{display:flex;align-items:flex-end;gap:14px;flex-wrap:wrap;margin-bottom:26px}
+    .sec-head .no{font-size:13px;color:var(--acc);font-weight:800;letter-spacing:2px}
+    .sec-head h2{font-size:clamp(22px,3.4vw,30px);font-weight:900;letter-spacing:.5px}
+    .sec-head h2 u{text-decoration:none;color:var(--acc)}
+    .sec-head .more{margin-left:auto;font-size:13px;color:var(--sub);border:1px solid var(--line);padding:6px 16px;border-radius:20px}
+    .sec-head .more:hover{color:#fff;background:rgba(255,255,255,.07)}
+
+    .grid{display:grid;gap:20px}
+    .g4{grid-template-columns:repeat(4,1fr)}
+    .g3{grid-template-columns:repeat(3,1fr)}
+    .g2{grid-template-columns:repeat(2,1fr)}
+
+    .card{
+        background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;
+        transition:.3s;position:relative
+    }
+    .card:hover{transform:translateY(-6px);border-color:rgba(255,92,138,.4);box-shadow:0 18px 40px rgba(0,0,0,.45)}
+    .thumb{position:relative;aspect-ratio:2/3;overflow:hidden;background:linear-gradient(135deg,#20274e,#0f1538)}
+    .thumb .ab{
+        position:absolute;inset:0;display:grid;place-items:center;font-size:26px;font-weight:800;
+        color:rgba(255,255,255,.18);text-align:center;padding:10px;line-height:1.3
+    }
+    .thumb .ov{
+        position:absolute;inset:0;background:linear-gradient(to top,rgba(7,9,29,.95),rgba(7,9,29,.2) 55%,rgba(7,9,29,.55));
+        display:flex;flex-direction:column;justify-content:flex-end;gap:6px;padding:14px;opacity:0;transition:.3s
+    }
+    .card:hover .thumb .ov{opacity:1}
+    .thumb .ov a{
+        align-self:flex-start;background:var(--acc);color:#fff;font-size:12px;font-weight:700;
+        padding:6px 16px;border-radius:8px
+    }
+    .thumb .rate{
+        position:absolute;top:10px;right:10px;background:rgba(0,0,0,.55);color:var(--gold);
+        font-size:12px;font-weight:800;padding:3px 9px;border-radius:8px;backdrop-filter:blur(4px)
+    }
+    .thumb .type{
+        position:absolute;top:10px;left:10px;background:var(--acc2);color:#fff;
+        font-size:11px;font-weight:700;padding:3px 9px;border-radius:8px
+    }
+    .meta{padding:13px 15px}
+    .meta h3{font-size:15px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .meta p{font-size:12px;color:var(--sub);margin-top:5px;display:flex;gap:8px;flex-wrap:wrap}
+    .meta p i{font-style:normal;color:#6f7899}
+
+    /* genre chips */
+    .chips{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px}
+    .chip{
+        padding:9px 20px;border-radius:30px;font-size:13px;font-weight:600;cursor:pointer;
+        background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--sub);transition:.25s
+    }
+    .chip:hover,.chip.on{color:#fff;border-color:var(--acc);background:rgba(255,92,138,.14)}
+
+    /* feature */
+    .feat{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+    .fbox{
+        background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.015));
+        border:1px solid var(--line);border-radius:18px;padding:26px 22px;transition:.3s
+    }
+    .fbox:hover{transform:translateY(-5px);border-color:rgba(124,107,255,.45)}
+    .fbox .ic{
+        width:50px;height:50px;border-radius:14px;display:grid;place-items:center;font-size:24px;
+        background:linear-gradient(135deg,rgba(255,92,138,.25),rgba(124,107,255,.25));margin-bottom:14px
+    }
+    .fbox h4{font-size:17px;margin-bottom:7px}
+    .fbox p{font-size:13px;color:var(--sub)}
+
+    /* rank */
+    .rank{display:flex;flex-direction:column;gap:12px}
+    .rk{
+        display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--line);
+        border-radius:14px;padding:12px;transition:.25s
+    }
+    .rk:hover{background:rgba(255,92,138,.08);border-color:rgba(255,92,138,.35)}
+    .rk .n{
+        width:34px;height:34px;flex-shrink:0;border-radius:10px;display:grid;place-items:center;
+        font-weight:900;font-size:15px;background:rgba(255,255,255,.06)
+    }
+    .rk:nth-child(1) .n{background:linear-gradient(135deg,#ffd27a,#ff9a3c);color:#2a1a00}
+    .rk:nth-child(2) .n{background:linear-gradient(135deg,#cfd6e6,#8f9cbd);color:#1a2035}
+    .rk:nth-child(3) .n{background:linear-gradient(135deg,#e8b99a,#c77b4a);color:#2a1a0d}
+    .rk .t{flex:1;min-width:0}
+    .rk .t h4{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .rk .t small{color:var(--sub);font-size:12px}
+    .rk .s{color:var(--gold);font-size:12px;font-weight:700}
+
+    /* steps */
+    .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;counter-reset:s}
+    .step{
+        position:relative;background:var(--card);border:1px solid var(--line);border-radius:16px;
+        padding:24px 20px 20px;counter-increment:s
+    }
+    .step::before{
+        content:"0" counter(s);position:absolute;top:14px;right:18px;
+        font-size:30px;font-weight:900;color:rgba(255,255,255,.06)
+    }
+    .step .dot{width:12px;height:12px;border-radius:50%;background:var(--acc);margin-bottom:14px;box-shadow:0 0 14px var(--acc)}
+    .step h4{font-size:16px;margin-bottom:6px}
+    .step p{font-size:13px;color:var(--sub)}
+
+    /* faq */
+    .faq{display:flex;flex-direction:column;gap:12px}
+    .faq details{
+        background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px;
+        transition:.25s;cursor:pointer
+    }
+    .faq details:hover{border-color:rgba(124,107,255,.4)}
+    .faq summary{font-weight:700;font-size:15px;list-style:none;display:flex;gap:12px;align-items:flex-start}
+    .faq summary::-webkit-details-marker{display:none}
+    .faq summary::before{content:"Q";flex-shrink:0;width:24px;height:24px;border-radius:7px;background:var(--acc2);color:#fff;font-size:13px;font-weight:800;display:grid;place-items:center}
+    .faq details p{margin:12px 0 2px 36px;font-size:14px;color:var(--sub)}
+    .faq details[open]{border-color:rgba(255,92,138,.35);background:rgba(255,92,138,.04)}
+
+    /* cta band */
+    .band{
+        border-radius:26px;padding:44px 36px;text-align:center;position:relative;overflow:hidden;
+        background:linear-gradient(120deg,rgba(255,92,138,.18),rgba(124,107,255,.18));
+        border:1px solid var(--line)
+    }
+    .band h3{font-size:clamp(22px,3.6vw,32px);font-weight:900;margin-bottom:10px}
+    .band p{color:var(--sub);margin-bottom:22px;font-size:15px}
+    .band .btn-p{box-shadow:0 12px 30px rgba(124,107,255,.4)}
+
+    /* footer */
+    .foot{margin-top:40px;border-top:1px solid var(--line);padding:44px 0 26px;color:var(--sub);font-size:13px}
+    .fcols{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:28px;margin-bottom:30px}
+    .fcols h5{color:#fff;font-size:15px;margin-bottom:12px}
+    .fcols ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+    .fcols a:hover{color:#fff}
+    .foot .copy{border-top:1px solid var(--line);padding-top:20px;display:flex;gap:12px;flex-wrap:wrap;justify-content:space-between}
+    .foot .copy a:hover{color:#fff}
+
+    /* top btn */
+    .top{
+        position:fixed;right:20px;bottom:24px;z-index:99;width:46px;height:46px;border-radius:50%;
+        display:grid;place-items:center;font-size:19px;color:#fff;cursor:pointer;opacity:0;pointer-events:none;
+        transition:.3s;background:linear-gradient(135deg,var(--acc),var(--acc2));box-shadow:0 10px 26px rgba(255,92,138,.35)
+    }
+    .top.show{opacity:1;pointer-events:auto}
+
+    /* responsive */
+    @media(max-width:960px){
+        .hero-grid{grid-template-columns:1fr}
+        .poster{max-width:340px;margin:0 auto;transform:none}
+        .g4,.feat,.steps,.fcols{grid-template-columns:repeat(2,1fr)}
+    }
+    @media(max-width:680px){
+        .wrap{padding:0 16px}
+        .nav{height:60px;gap:10px}
+        .logo{font-size:17px}
+        .logo span{display:none}
+        .search{display:none}
+        .menu a{padding:7px 10px;font-size:13px}
+        .hero{padding:34px 0 20px}
+        .stats{gap:18px}
+        section{padding:40px 0}
+        .g4,.g3,.g2,.feat,.steps,.fcols{grid-template-columns:repeat(2,1fr)}
+        .rank,.faq{grid-column:1/-1}
+        .band{padding:32px 22px}
+        .float{display:none}
+    }
+    @media(max-width:420px){
+        .g4,.g3{grid-template-columns:repeat(2,1fr);gap:12px}
+        .meta h3{font-size:13px}
+        .meta p{font-size:11px}
+        .btn{padding:11px 20px;font-size:14px}
+    }
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/yazhou.js"></script>
+
+<header class="header">
+    <div class="wrap nav">
+        <a class="logo" href="#top" title="飘零电影网 首页">
+            <span class="badge">🎬</span>
+            <span><b>飘零电影网</b></span>
+            <span>piaolingdianyingwang-app</span>
+        </a>
+        <nav class="menu">
+            <a href="#top" class="on">首页</a>
+            <a href="#hot">热播榜</a>
+            <a href="#movie">电影</a>
+            <a href="#tv">剧集</a>
+            <a href="#feature">特色</a>
+            <a href="#guide">使用指南</a>
+            <a href="#faq">常见问题</a>
+        </nav>
+        <div class="search">
+            <span>🔍</span>
+            <input placeholder="搜索影片、演员、导演" aria-label="搜索">
+        </div>
+    </div>
+</header>
+
+<main id="top">
+    <!-- Hero -->
+    <section class="hero">
+        <div class="wrap hero-grid">
+            <div>
+                <div class="eyebrow"><i></i> 每日 09:00 准时更新 · 2026 全新片库</div>
+                <h1>飘零电影网 <em>piaolingdianyingwang-app</em><br>一口气看完全网热片</h1>
+                <p>飘零电影网（piaolingdianyingwang-app）专注于提供<strong>高清电影、热门电视剧、动漫综艺</strong>的在线观看与资源下载服务。无广告干扰、秒级播放、多线路切换，手机电脑电视全端自适应，让你随时随地畅享影院级体验。</p>
+                <div class="stats">
+                    <div><b>12.8万+</b><small>正版高清片源</small></div>
+                    <div><b>99.6%</b><small>秒开播放成功率</small></div>
+                    <div><b>365天</b><small>不间断更新</small></div>
+                    <div><b>0</b><small>弹窗广告</small></div>
+                </div>
+                <div class="cta">
+                    <a class="btn btn-p" href="#movie">🎞️ 立即免费观看</a>
+                    <a class="btn btn-g" href="#guide">📖 新手使用指南</a>
+                </div>
+            </div>
+
+            <div class="poster">
+                <div class="tag">本周编辑精选</div>
+                <div class="scr"></div>
+                <div class="float f1"><b>4K 超清</b>画质细腻如影院</div>
+                <div class="float f2"><img alt=""><b>多线路</b>卡顿自动切换</div>
+                <div class="float f3"><b>每日更新</b>院线同步上线</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 热播榜 -->
+    <section id="hot">
+        <div class="wrap">
+            <div class="sec-head">
+                <div>
+                    <div class="no">TOP LIST</div>
+                    <h2>今日 <u>热播榜</u></h2>
+                </div>
+                <a class="more" href="#movie">查看完整榜单 →</a>
+            </div>
+            <div class="g2" style="grid-template-columns:1.05fr .95fr">
+                <div class="grid g3" style="grid-template-columns:repeat(3,1fr)">
+                    <article class="card">
+                        <div class="thumb"><span class="ab">默杀</span><span class="type">悬疑</span><span class="rate">★ 9.2</span>
+                            <div class="ov"><a href="#">立即观看</a></div></div>
+                        <div class="meta"><h3>默杀</h3><p><span>2026</span><i>·</i><span>118分钟</span></p></div>
+                    </article>
+                    <article class="card">
+                        <div class="thumb"><span class="ab">焚城</span><span class="type">动作</span><span class="rate">★ 8.9</span>
+                            <div class="ov"><a href="#">立即观看</a></div></div>
+                        <div class="meta"><h3>焚城</h3><p><span>2026</span><i>·</i><span>126分钟</span></p></div>
+                    </article>
+                    <article class="card">
+                        <div class="thumb"><span class="ab">抓娃娃</span><span class="type">喜剧</span><span class="rate">★ 9.0</span>
+                            <div class="ov"><a href="#">立即观看</a></div></div>
+                        <div class="meta"><h3>抓娃娃</h3><p><span>2026</span><i>·</i><span>112分钟</span></p></div>
+                    </article>
+                </div>
+                <div class="rank">
+                    <div class="rk"><span class="n">1</span><div class="t"><h4>默杀</h4><small>悬疑 / 犯罪 · 热度高涨</small></div><span class="s">🔥 128万</span></div>
+                    <div class="rk"><span class="n">2</span><div class="t"><h4>焚城</h4><small>动作 / 灾难 · 特效炸裂</small></div><span class="s">🔥 96万</span></div>
+                    <div class="rk"><span class="n">3</span><div class="t"><h4>抓娃娃</h4><small>喜剧 / 家庭 · 笑到缺氧</small></div><span class="s">🔥 87万</span></div>
+                    <div class="rk"><span class="n">4</span><div class="t"><h4>逆行人生</h4><small>剧情 / 现实 · 口碑佳作</small></div><span class="s">🔥 72万</span></div>
+                    <div class="rk"><span class="n">5</span><div class="t"><h4>白蛇：浮生</h4><small>动画 / 奇幻 · 国漫之光</small></div><span class="s">🔥 65万</span></div>
+                    <div class="rk"><span class="n">6</span><div class="t"><h4>异形：夺命舰</h4><small>科幻 / 惊悚 · 沉浸式</small></div><span class="s">🔥 58万</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 电影 -->
+    <section id="movie">
+        <div class="wrap">
+            <div class="sec-head">
+                <div>
+                    <div class="no">MOVIE</div>
+                    <h2>电影频道 · <u>院线同步</u></h2>
+                </div>
+                <a class="more" href="#">更多电影 →</a>
+            </div>
+            <div class="chips">
+                <span class="chip on">全部</span>
+                <span class="chip">动作</span>
+                <span class="chip">喜剧</span>
+                <span class="chip">爱情</span>
+                <span class="chip">科幻</span>
+                <span class="chip">悬疑</span>
+                <span class="chip">动画</span>
+                <span class="chip">纪录片</span>
+            </div>
+            <div class="grid g4">
+                <article class="card"><div class="thumb"><span class="ab">默杀</span><span class="type">悬疑</span><span class="rate">★ 9.2</span><div class="ov"><a href="#">立即观看</a></div></div><div class="meta"><h3>默杀</h3><p><span>2026</span><i>·</i><span>118分钟</span><i>·</i><span>张钧甯</span></p></div></article>
+                <article class="card"><div class="thumb"><span class="ab">焚城</span><span class="type">动作</span><span class="rate">★ 8.9</span><div class="ov"><a href="#">立即观看</a></div></div><div class="meta"><h3>焚城</h3><p><span>2026</span><i>·</i><span>126分钟</span><i>·</i><span>刘德华</span></p></div></article>
+                <article class="card"><div class="thumb"><span class="ab">抓娃娃</span><span class="type">喜剧</span><span class="rate">★ 9.0</span><div class="ov"><a href="#">立即观看</a></div></div><div class="meta"><h3>抓娃娃</h3><p><span>2026</span><i>·</i><span>112分钟</span><i>·</i><span>沈腾</span></p></div></article>
+                <article class="card"><div class="thumb"><span class="ab">逆行人生</span><span class="type">剧情</span><span class="rate">★ 8.7</span><div class="ov"><a href="#">立即观看</a></div></div><div class="meta"><h3>逆行人生</h3><p><span>2026</span><i>·</i><span>122分钟</span><i>·</i><span>徐峥</span></p></div></article>
+                <article class="card"><div class="thumb"><span class="ab">白蛇：浮生</span><span class="type">动画</span><span class="rate">★ 9.1</span><div class="ov"><a href="#">立即观看</a></div></div><div class="meta"><h3>白蛇：浮生</h3><p><span>2026</span><i>·</i><span>105分钟</span><i>·</i><span>国漫</span></p></div></article>
+                <article class="card"><div class="thumb"><span class="ab">异形：夺命舰</span><span class="type">科幻</span><span class="rate">★ 8.5</span><div class="ov"><a href="#">立即观看</a></div></div><div class="meta"><h3>异形：夺命舰</h3><p><span>2026</span><i>·</i><span>119分钟</span><i>·</i><span>惊悚</span></p></div></article>
+                <article class="card"><div class="thumb"><span class="ab">从21世纪安全撤离</span><span class="type">科幻</span><span class="rate">★ 8.3</span><div class="ov"><a href="#">立即观看</a></div></div><div class="meta"><h3>从21世纪安全撤离</h3><p><span>2026</span><i>·</i><span>98分钟</span><i>·</i><span>张若昀</span></p></div></article>
+                <article class="card"><div class="thumb"><span class="ab">里斯本丸沉没</span><span class="type">纪录</span><span class="rate">★ 9.3</span><div class="ov"><a href="#">立即观看</a></div></div><div class="meta"><h3>里斯本丸沉没</h3><p><span>2026</span><i>·</i><span>86分钟</span><i>·</i><span>纪录片</span></p></div></article>
+            </div>
+        </div>
+    </section>
+
+    <!-- 剧集 -->
+    <section id="tv">
+        <div class="wrap">
+            <div class="sec-head">
+                <div>
+                    <div class="no">TV &amp; SHOW</div>
+                    <h2>电视剧 · <u>动漫综艺</u></h2>
+                </div>
+                <a class="more" href="#">更多剧集 →</a>
+            </div>
+            <div class="grid g4">
+                <article class="card"><div class="thumb"><span class="ab">庆余年 第三季</span><span class="type">古装</span><span class="rate">★ 9.4</span><div class="ov"><a href="#">立即观看</a></div></div><div class="meta"><h3>庆余年 第三季</h3><p><span>更新至 28 集</span><i>·</i><span>张若昀</span></p></div></article>
+                <article class="card"><div class="thumb"><span class="ab">繁花</span><span class="type">年代</span><span class="rate">★ 9.1</span><div class="ov"><a href="#">立即观看</a></div></div><div class="meta"><h3>繁花</h3><p><span>全 30 集</span><i>·</i><span>胡歌</span></p></div></article>
+                <article class="card"><div class="thumb"><span class="ab">唐朝诡事录 2</span><span class="type">悬疑</span><span class="rate">★ 8.8</span><div class="ov"><a href="#">立即观看</a></div></div><div class="meta"><h3>唐朝诡事录 2</h3><p><span>更新至 22 集</span><i>·</i><span>杨旭文</span></p></div></article>
+                <article class="card"><div class="thumb"><span class="ab">甄嬛传</span><span class="type">经典</span><span class="rate">★ 9.6</span><div class="ov"><a href="#">立即观看</a></div></div><div class="meta"><h3>甄嬛传（未删减）</h3><p><span>全 76 集</span><i>·</i><span>孙俪</span></p></div></article>
+                <article class="card"><div class="thumb"><span class="ab">雾山五行</span><span class="type">国漫</span><span class="rate">★ 9.5</span><div class="ov"><a href="#">立即观看</a></div></div><div class="meta"><h3>雾山五行 Ⅱ</h3><p><span>更新至 6 集</span><i>·</i><span>动画</span></p></div></article>
+                <article class="card"><div class="thumb"><span class="ab">葬送的芙莉莲</span><span class="type">动漫</span><span class="rate">★ 9.7</span><div class="ov"><a href="#">立即观看</a></div></div><div class="meta"><h3>葬送的芙莉莲</h3><p><span>全 28 集</span><i>·</i><span>奇幻冒险</span></p></div></article>
+                <article class="card"><div class="thumb"><span class="ab">奔跑吧</span><span class="type">综艺</span><span class="rate">★ 8.4</span><div class="ov"><a href="#">立即观看</a></div></div><div class="meta"><h3>奔跑吧 第12季</h3><p><span>更新中</span><i>·</i><span>户外竞技</span></p></div></article>
+                <article class="card"><div class="thumb"><span class="ab">十三邀</span><span class="type">访谈</span><span class="rate">★ 9.2</span><div class="ov"><a href="#">立即观看</a></div></div><div class="meta"><h3>十三邀 第八季</h3><p><span>更新中</span><i>·</i><span>人文纪实</span></p></div></article>
+            </div>
+        </div>
+    </section>
+
+    <!-- 特色 -->
+    <section id="feature">
+        <div class="wrap">
+            <div class="sec-head">
+                <div>
+                    <div class="no">WHY US</div>
+                    <h2>为什么选择 <u>飘零电影网</u></h2>
+                </div>
+            </div>
+            <div class="feat">
+                <div class="fbox"><div class="ic">🚀</div><h4>秒开即播</h4><p>自研 P2P + CDN 双引擎，首帧加载 &lt; 0.6 秒，拖拽进度零等待，告别转圈。</p></div>
+                <div class="fbox"><div class="ic">🖥️</div><h4>全端自适应</h4><p>手机、平板、电脑、智能电视、车机全面适配，竖屏横屏自动切换，一套账号多端续播。</p></div>
+                <div class="fbox"><div class="ic">🎞️</div><h4>真 4K 画质</h4><p>最高支持 4K HDR 与杜比音效，码率自适应，弱网也能流畅看 1080P。</p></div>
+                <div class="fbox"><div class="ic">📥</div><h4>极速下载</h4><p>内置磁力、迅雷、网盘多协议下载，支持断点续传与后台离线，通勤路上随时看。</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 使用指南 -->
+    <section id="guide">
+        <div class="wrap">
+            <div class="sec-head">
+                <div>
+                    <div class="no">HOW TO</div>
+                    <h2>三步开启 <u>观影之旅</u></h2>
+                </div>
+            </div>
+            <div class="steps">
+                <div class="step"><span class="dot"></span><h4>搜索影片</h4><p>在顶部搜索框输入片名、演员或导演，智能联想秒出结果，支持拼音与错别字纠错。</p></div>
+                <div class="step"><span class="dot"></span><h4>选择线路</h4><p>提供"超清 / 高清 / 极速"多条播放线路，卡顿一键切换，还可投屏到大屏设备。</p></div>
+                <div class="step"><span class="dot"></span><h4>在线观看</h4><p>点击即播，自动记录观看进度，下次打开续播；支持倍速、字幕、画中画。</p></div>
+                <div class="step"><span class="dot"></span><h4>离线下载</h4><p>点击"下载"按钮，选择清晰度与存储路径，后台高速下载，无网也能刷完一整部。</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 资讯 -->
+    <section id="news">
+        <div class="wrap">
+            <div class="sec-head">
+                <div>
+                    <div class="no">NEWS</div>
+                    <h2>影视资讯 · <u>观影攻略</u></h2>
+                </div>
+                <a class="more" href="#">更多资讯 →</a>
+            </div>
+            <div class="grid g3">
+                <article class="card">
+                    <div class="thumb" style="aspect-ratio:16/9"><span class="ab">2026 国庆档前瞻</span><span class="type">档期</span></div>
+                    <div class="meta"><h3>2026 国庆档 12 部新片扎堆，这几部最值得抢首映</h3><p><span>飘零电影网</span><i>·</i><span>2 小时前</span></p></div>
+                </article>
+                <article class="card">
+                    <div class="thumb" style="aspect-ratio:16/9"><span class="ab">画质设置指南</span><span class="type">教程</span></div>
+                    <div class="meta"><h3>手机看片怎么调最省流量？4K / 1080P 智能切换设置详解</h3><p><span>飘零电影网</span><i>·</i><span>1 天前</span></p></div>
+                </article>
+                <article class="card">
+                    <div class="thumb" style="aspect-ratio:16/9"><span class="ab">国漫崛起</span><span class="type">观察</span></div>
+                    <div class="meta"><h3>从《白蛇》到《雾山五行》，国漫为何连续出圈？</h3><p><span>飘零电影网</span><i>·</i><span>3 天前</span></p></div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+        <div class="wrap">
+            <div class="sec-head">
+                <div>
+                    <div class="no">FAQ</div>
+                    <h2>常见问题 <u>答疑</u></h2>
+                </div>
+            </div>
+            <div class="g2" style="grid-template-columns:1fr">
+                <div class="faq">
+                    <details open>
+                        <summary>飘零电影网（piaolingdianyingwang-app）是什么？</summary>
+                        <p>飘零电影网是一个专注于高清影视在线观看与下载的导航型站点，聚合电影、电视剧、动漫、综艺等资源，提供多线路播放、智能搜索与离线下载，网址为 https://piaolingdianyingwang-app.github.io，手机电脑均可访问。</p>
+                    </details>
+                    <details>
+                        <summary>访问网站需要注册或付费吗？</summary>
+                        <p>不需要。飘零电影网支持游客直接观看，收藏与续播等个性化功能可选择免费登录，全站无强制付费、无恶意弹窗。</p>
+                    </details>
+                    <details>
+                        <summary>播放卡顿、加载慢怎么办？</summary>
+                        <p>请尝试：① 切换"超清 / 高清 / 极速"播放线路；② 降低清晰度至 1080P；③ 清除浏览器缓存或更换 Chrome / Edge 最新版；④ 检查本地网络，Wi-Fi 下体验最佳。</p>
+                    </details>
+                    <details>
+                        <summary>如何投屏到电视？</summary>
+                        <p>播放页点击右上角"投屏"图标，确保手机与电视处于同一局域网，选择对应设备即可；也支持 DLNA 与 AirPlay 协议。</p>
+                    </details>
+                    <details>
+                        <summary>如何下载影片离线观看？</summary>
+                        <p>在影片详情页点击"下载"，可选择清晰度与下载方式（磁力 / 迅雷 / 网盘），支持断点续传与后台下载。</p>
+                    </details>
+                    <details>
+                        <summary>网站会更新吗？新片多久上线？</summary>
+                        <p>每日 09:00 与 21:00 两次更新，院线新片通常在下映后 7–15 天内上线高清版本，热门剧集与动漫做到"周更同步"。</p>
+                    </details>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section>
+        <div class="wrap">
+            <div class="band">
+                <h3>🎬 打开飘零电影网，今晚就看好片</h3>
+                <p>飘零电影网 piaolingdianyingwang-app · 12.8 万+ 片源 · 4K 画质 · 全端自适应 · 零广告</p>
+                <a class="btn btn-p" href="#movie">🚀 立即免费观看</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="foot">
+    <div class="wrap">
+        <div class="fcols">
+            <div>
+                <a class="logo" href="#top"><span class="badge">🎬</span><span><b>飘零电影网</b></span></a>
+                <p style="margin-top:12px;max-width:340px">飘零电影网（piaolingdianyingwang-app）致力成为你口袋里的私人影院。电影、剧集、动漫、综艺一站看完，https://piaolingdianyingwang-app.github.io 随时等你回来。</p>
+            </div>
+            <div>
+                <h5>频道导航</h5>
+                <ul>
+                    <li><a href="#movie">电影</a></li>
+                    <li><a href="#tv">电视剧</a></li>
+                    <li><a href="#tv">动漫</a></li>
+                    <li><a href="#tv">综艺</a></li>
+                    <li><a href="#hot">热播榜</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5>帮助中心</h5>
+                <ul>
+                    <li><a href="#guide">使用指南</a></li>
+                    <li><a href="#faq">常见问题</a></li>
+                    <li><a href="#">投屏教程</a></li>
+                    <li><a href="#">下载说明</a></li>
+                    <li><a href="#">反馈建议</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5>关于我们</h5>
+                <ul>
+                    <li><a href="#">站点简介</a></li>
+                    <li><a href="#">更新日志</a></li>
+                    <li><a href="#">商务合作</a></li>
+                    <li><a href="#">隐私政策</a></li>
+                    <li><a href="#">用户协议</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copy">
+            <span>© 2026 飘零电影网 piaolingdianyingwang-app 版权所有 · 网址：https://piaolingdianyingwang-app.github.io</span>
+            <span>
+                <a href="#">免责声明</a>
+                <a href="#">举报邮箱</a>
+                <a href="#">友链申请</a>
+            </span>
+        </div>
+    </div>
+</footer>
+
+<div class="top" id="topBtn" title="返回顶部">↑</div>
+
+<script>
+    // 平滑高亮当前导航
+    var links = document.querySelectorAll('.menu a');
+    var secs = ['hot','movie','tv','feature','guide','faq'].map(function(id){return document.getElementById(id);});
+    function onScroll(){
+        var y = window.scrollY + 120, cur = 0;
+        secs.forEach(function(s,i){ if(s && s.offsetTop <= y) cur = i; });
+        links.forEach(function(a,i){ a.classList.toggle('on', i === cur); });
+        document.getElementById('topBtn').classList.toggle('show', window.scrollY > 500);
+    }
+    window.addEventListener('scroll', onScroll, {passive:true});
+    onScroll();
+
+    // 分类筛选交互
+    document.querySelectorAll('.chip').forEach(function(c){
+        c.addEventListener('click', function(){
+            c.parentElement.querySelectorAll('.chip').forEach(function(x){x.classList.remove('on');});
+            c.classList.add('on');
+        });
+    });
+</script>
+</body>
+</html>
